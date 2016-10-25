@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
 	s.ios.deployment_target = '5.0'
 	s.osx.deployment_target = '10.7'
 	s.requires_arc = true
+	s.xcconfig = { 'OTHER_LDFLAGS' => '-lobjc' }
 end
