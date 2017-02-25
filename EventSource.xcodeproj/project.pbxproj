@@ -21,7 +21,22 @@
 		2838335517A1C02900C0141D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2838335417A1C02900C0141D /* Default-568h@2x.png */; };
 		2838335817A1C02900C0141D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838335717A1C02900C0141D /* ViewController.m */; };
 		2838335B17A1C02900C0141D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2838335917A1C02900C0141D /* ViewController.xib */; };
+		6947B6EC1E62251600C8CB4B /* EventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2838333117A1BFFE00C0141D /* EventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6947B6ED1E62252000C8CB4B /* EventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838333317A1BFFE00C0141D /* EventSource.m */; };
+		69DE1C291E61765000CF816C /* EventSource-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 69DE1C271E61765000CF816C /* EventSource-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69DE1C2C1E61765000CF816C /* EventSource-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69DE1C251E61765000CF816C /* EventSource-iOS.framework */; };
+		69DE1C2D1E61765000CF816C /* EventSource-iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69DE1C251E61765000CF816C /* EventSource-iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69DE1C2A1E61765000CF816C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2838332117A1BFFD00C0141D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69DE1C241E61765000CF816C;
+			remoteInfo = "EventSource-iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		281714871DD735E400F7A8E0 /* Embed Frameworks */ = {
@@ -30,6 +45,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				69DE1C2D1E61765000CF816C /* EventSource-iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +84,9 @@
 		2838335617A1C02900C0141D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2838335717A1C02900C0141D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2838335A17A1C02900C0141D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		69DE1C251E61765000CF816C /* EventSource-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "EventSource-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69DE1C271E61765000CF816C /* EventSource-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EventSource-iOS.h"; sourceTree = "<group>"; };
+		69DE1C281E61765000CF816C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +102,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69DE1C2C1E61765000CF816C /* EventSource-iOS.framework in Frameworks */,
 				2817148A1DD736A200F7A8E0 /* UIKit.framework in Frameworks */,
 				2838334117A1C02900C0141D /* Foundation.framework in Frameworks */,
 				2838334317A1C02900C0141D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69DE1C211E61765000CF816C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +124,7 @@
 			children = (
 				2838332E17A1BFFE00C0141D /* EventSource */,
 				2838334417A1C02900C0141D /* EventViewer */,
+				69DE1C261E61765000CF816C /* EventSource-iOS */,
 				2838332B17A1BFFE00C0141D /* Frameworks */,
 				2838332A17A1BFFE00C0141D /* Products */,
 			);
@@ -107,6 +135,7 @@
 			children = (
 				2838332917A1BFFE00C0141D /* libEventSource.a */,
 				2838333E17A1C02900C0141D /* EventViewer.app */,
+				69DE1C251E61765000CF816C /* EventSource-iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,7 +196,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		69DE1C261E61765000CF816C /* EventSource-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				69DE1C271E61765000CF816C /* EventSource-iOS.h */,
+				69DE1C281E61765000CF816C /* Info.plist */,
+			);
+			path = "EventSource-iOS";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		69DE1C221E61765000CF816C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6947B6EC1E62251600C8CB4B /* EventSource.h in Headers */,
+				69DE1C291E61765000CF816C /* EventSource-iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		2838332817A1BFFD00C0141D /* EventSource */ = {
@@ -199,11 +249,30 @@
 			buildRules = (
 			);
 			dependencies = (
+				69DE1C2B1E61765000CF816C /* PBXTargetDependency */,
 			);
 			name = EventViewer;
 			productName = EventViewer;
 			productReference = 2838333E17A1C02900C0141D /* EventViewer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		69DE1C241E61765000CF816C /* EventSource-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69DE1C301E61765000CF816C /* Build configuration list for PBXNativeTarget "EventSource-iOS" */;
+			buildPhases = (
+				69DE1C201E61765000CF816C /* Sources */,
+				69DE1C211E61765000CF816C /* Frameworks */,
+				69DE1C221E61765000CF816C /* Headers */,
+				69DE1C231E61765000CF816C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EventSource-iOS";
+			productName = "EventSource-iOS";
+			productReference = 69DE1C251E61765000CF816C /* EventSource-iOS.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -213,6 +282,12 @@
 			attributes = {
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Neil Cowburn";
+				TargetAttributes = {
+					69DE1C241E61765000CF816C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 2838332417A1BFFD00C0141D /* Build configuration list for PBXProject "EventSource" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -228,6 +303,7 @@
 			targets = (
 				2838332817A1BFFD00C0141D /* EventSource */,
 				2838333D17A1C02900C0141D /* EventViewer */,
+				69DE1C241E61765000CF816C /* EventSource-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -242,6 +318,13 @@
 				2838335317A1C02900C0141D /* Default@2x.png in Resources */,
 				2838335517A1C02900C0141D /* Default-568h@2x.png in Resources */,
 				2838335B17A1C02900C0141D /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69DE1C231E61765000CF816C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +349,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69DE1C201E61765000CF816C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6947B6ED1E62252000C8CB4B /* EventSource.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69DE1C2B1E61765000CF816C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69DE1C241E61765000CF816C /* EventSource-iOS */;
+			targetProxy = 69DE1C2A1E61765000CF816C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2838334717A1C02900C0141D /* InfoPlist.strings */ = {
@@ -407,7 +506,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventViewer/EventViewer-Prefix.pch";
 				INFOPLIST_FILE = "EventViewer/EventViewer-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.neilcowburn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -421,11 +521,82 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventViewer/EventViewer-Prefix.pch";
 				INFOPLIST_FILE = "EventViewer/EventViewer-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.neilcowburn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		69DE1C2E1E61765000CF816C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "EventSource-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchos watchsimulator";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		69DE1C2F1E61765000CF816C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "EventSource-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchos watchsimulator";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -455,6 +626,15 @@
 			buildConfigurations = (
 				2838335D17A1C02900C0141D /* Debug */,
 				2838335E17A1C02900C0141D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69DE1C301E61765000CF816C /* Build configuration list for PBXNativeTarget "EventSource-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69DE1C2E1E61765000CF816C /* Debug */,
+				69DE1C2F1E61765000CF816C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
