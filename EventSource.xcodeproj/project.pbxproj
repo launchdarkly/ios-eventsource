@@ -18,9 +18,9 @@
 		2838335517A1C02900C0141D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2838335417A1C02900C0141D /* Default-568h@2x.png */; };
 		2838335817A1C02900C0141D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838335717A1C02900C0141D /* ViewController.m */; };
 		2838335B17A1C02900C0141D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2838335917A1C02900C0141D /* ViewController.xib */; };
+		69247F001E634B8700F7543E /* EventSource-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2838333017A1BFFE00C0141D /* EventSource-Prefix.pch */; };
 		6947B6EC1E62251600C8CB4B /* EventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 2838333117A1BFFE00C0141D /* EventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6947B6ED1E62252000C8CB4B /* EventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838333317A1BFFE00C0141D /* EventSource.m */; };
-		6947B6F01E62293400C8CB4B /* EventSource-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2838333017A1BFFE00C0141D /* EventSource-Prefix.pch */; };
 		69DE1C2C1E61765000CF816C /* EventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69DE1C251E61765000CF816C /* EventSource.framework */; };
 		69DE1C2D1E61765000CF816C /* EventSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69DE1C251E61765000CF816C /* EventSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -180,7 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6947B6EC1E62251600C8CB4B /* EventSource.h in Headers */,
-				6947B6F01E62293400C8CB4B /* EventSource-Prefix.pch in Headers */,
+				69247F001E634B8700F7543E /* EventSource-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +366,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = EventSource;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx10.12;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -401,7 +401,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = EventSource;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx10.12;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -462,6 +462,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.12;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchos watchsimulator";
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
@@ -497,6 +498,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.12;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchos watchsimulator";
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
