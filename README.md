@@ -2,7 +2,7 @@
 **Server-Sent Events for iOS, watchOS, tvOS and Mac**
 
 ![Travis](https://travis-ci.org/neilco/EventSource.svg?branch=master)
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AFNetworking.svg)](https://img.shields.io/cocoapods/v/AFNetworking.svg)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DarklyEventSource.svg)](https://img.shields.io/cocoapods/v/DarklyEventSource.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/AFNetworking.svg?style=flat)](http://cocoadocs.org/docsets/AFNetworking)
 
@@ -86,7 +86,7 @@ $ gem install cocoapods
 ```
 #### Podfile
 
-To integrate AFNetworking into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate EventSource into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
