@@ -243,7 +243,12 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
     if (self.session) {
         [self.session invalidateAndCancel];
     }
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+
+    NSURLSessionConfiguration * config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+
+    config.HTTPAdditionalHeaders = @{ @"Accept": @"text/event-stream" };
+
+    self.session = [NSURLSession sessionWithConfiguration:config
                                                  delegate:self
                                             delegateQueue:[NSOperationQueue currentQueue]];
     
