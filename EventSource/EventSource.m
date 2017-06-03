@@ -34,6 +34,8 @@ static NSString *const ESEventRetryKey = @"retry";
 @property (nonatomic, strong) NSURLSessionDataTask *eventSourceTask;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSMutableDictionary *listeners;
+@property (nonatomic, strong) NSMutableData * data;
+
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 @property (nonatomic, assign) NSTimeInterval retryInterval;
 @property (nonatomic, assign) NSInteger retryAttempt;
@@ -72,9 +74,10 @@ static NSString *const ESEventRetryKey = @"retry";
         _retryInterval = ES_RETRY_INTERVAL;
         _retryAttempt = 0;
         _mobileKey = mobileKey;
+        _data = [NSMutableData dataWithCapacity:1024];
         messageQueue = dispatch_queue_create("co.cwbrn.eventsource-queue", DISPATCH_QUEUE_SERIAL);
         connectionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        
+
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_retryInterval * NSEC_PER_SEC));
         dispatch_after(popTime, connectionQueue, ^(void){
             [self _open];
@@ -140,36 +143,51 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-    NSString *eventString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [self.data appendData:data];
+    NSString *eventString = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
     NSArray *lines = [eventString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    
+
+    // lines before the last empty line are parsed, lines after the last empty line are stored back to the data.
+    int lastEmptyLine = -1;
+
+    for(int i = 0 ; i < lines.count ; i++) {
+        if([[lines objectAtIndex:i] isEqualToString:@""]) {
+            lastEmptyLine = i;
+        }
+    }
+
+    NSArray * saveLines = [lines subarrayWithRange:NSMakeRange(lastEmptyLine+1,lines.count - (lastEmptyLine + 1))];
+    lines = [lines subarrayWithRange:NSMakeRange(0,lastEmptyLine+1)];
+
+    self.data = [[[saveLines componentsJoinedByString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+
     Event *event = [Event new];
     event.readyState = kEventStateOpen;
-    
+
     for (NSString *line in lines) {
         if ([line hasPrefix:ESKeyValueDelimiter]) {
             continue;
         }
-        
+
         if (!line || line.length == 0) {
             dispatch_async(messageQueue, ^{
                 [self _dispatchEvent:event];
             });
-            
+
             event = [Event new];
             event.readyState = kEventStateOpen;
             continue;
         }
-        
+
         @autoreleasepool {
             NSScanner *scanner = [NSScanner scannerWithString:line];
             scanner.charactersToBeSkipped = [NSCharacterSet whitespaceCharacterSet];
-            
+
             NSString *key, *value;
             [scanner scanUpToString:ESKeyValueDelimiter intoString:&key];
             [scanner scanString:ESKeyValueDelimiter intoString:nil];
             [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&value];
-            
+
             if (key && value) {
                 if ([key isEqualToString:ESEventEventKey]) {
                     event.event = value;
