@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "69DE1C241E61765000CF816C"
-               BuildableName = "LDEventSource.framework"
-               BlueprintName = "LDEventSource"
+               BuildableName = "DarklyEventSource.framework"
+               BlueprintName = "DarklyEventSource"
                ReferencedContainer = "container:LDEventSource.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,8 +48,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69DE1C241E61765000CF816C"
-            BuildableName = "LDEventSource.framework"
-            BlueprintName = "LDEventSource"
+            BuildableName = "DarklyEventSource.framework"
+            BlueprintName = "DarklyEventSource"
             ReferencedContainer = "container:LDEventSource.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "69DE1C241E61765000CF816C"
-            BuildableName = "LDEventSource.framework"
-            BlueprintName = "LDEventSource"
+            BuildableName = "DarklyEventSource.framework"
+            BlueprintName = "DarklyEventSource"
             ReferencedContainer = "container:LDEventSource.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
