@@ -171,9 +171,10 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
         }
         
         if (!line || line.length == 0) {
+            LDEvent *eventToDispatch = [event copy];
             __weak typeof(self) weakSelf = self;
             dispatch_async(messageQueue, ^{
-                [weakSelf _dispatchEvent:event];
+                [weakSelf _dispatchEvent:eventToDispatch];
             });
             
             event = [LDEvent new];
@@ -349,6 +350,16 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
             self.id,
             self.event,
             self.data];
+}
+
+-(id)copyWithZone:(NSZone*)zone {
+    LDEvent *copiedEvent = [[LDEvent alloc] init];
+    copiedEvent.id = self.id;
+    copiedEvent.event = self.event;
+    copiedEvent.data = self.data;
+    copiedEvent.readyState = self.readyState;
+    copiedEvent.error = self.error;
+    return copiedEvent;
 }
 
 @end
