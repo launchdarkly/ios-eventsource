@@ -7,22 +7,12 @@
 //
 
 #import "LDEventSource.h"
-#import <CoreGraphics/CGBase.h>
+#import "LDEventParser.h"
 
-static CGFloat const ES_RETRY_INTERVAL = 1.0;
-static CGFloat const ES_DEFAULT_TIMEOUT = 300.0;
-static CGFloat const ES_MAX_RECONNECT_TIME = 3600.0;
+static NSTimeInterval const ES_RETRY_INTERVAL = 1.0;
+static NSTimeInterval const ES_DEFAULT_TIMEOUT = 300.0;
+static NSTimeInterval const ES_MAX_RECONNECT_TIME = 3600.0;
 
-static NSString *const ESKeyValueDelimiter = @":";
-static NSString *const LDEventSeparatorLFLF = @"\n\n";
-static NSString *const LDEventSeparatorCRCR = @"\r\r";
-static NSString *const LDEventSeparatorCRLFCRLF = @"\r\n\r\n";
-static NSString *const LDEventKeyValuePairSeparator = @"\n";
-
-static NSString *const LDEventDataKey = @"data";
-static NSString *const LDEventIDKey = @"id";
-static NSString *const LDEventEventKey = @"event";
-static NSString *const LDEventRetryKey = @"retry";
 NSString *const LDEventSourceErrorDomain = @"LDEventSourceErrorDomain";
 
 static NSInteger const HTTPStatusCodeUnauthorized = 401;
@@ -160,54 +150,24 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     NSString *eventString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSArray *lines = [eventString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    
-    LDEvent *event = [LDEvent new];
-    event.readyState = kEventStateOpen;
-    
-    for (NSString *line in lines) {
-        if ([line hasPrefix:ESKeyValueDelimiter]) {
-            continue;
-        }
-        
-        if (!line || line.length == 0) {
-            LDEvent *eventToDispatch = [event copy];
-            __weak typeof(self) weakSelf = self;
-            dispatch_async(messageQueue, ^{
-                [weakSelf _dispatchEvent:eventToDispatch];
-            });
-            
-            event = [LDEvent new];
-            event.readyState = kEventStateOpen;
-            continue;
-        }
-        
-        @autoreleasepool {
-            NSScanner *scanner = [NSScanner scannerWithString:line];
-            scanner.charactersToBeSkipped = [NSCharacterSet whitespaceCharacterSet];
-            
-            NSString *key, *value;
-            [scanner scanUpToString:ESKeyValueDelimiter intoString:&key];
-            [scanner scanString:ESKeyValueDelimiter intoString:nil];
-            [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&value];
-            
-            if (key && value) {
-                if ([key isEqualToString:LDEventEventKey]) {
-                    event.event = value;
-                } else if ([key isEqualToString:LDEventDataKey]) {
-                    if (event.data != nil) {
-                        event.data = [event.data stringByAppendingFormat:@"\n%@", value];
-                    } else {
-                        event.data = value;
-                    }
-                } else if ([key isEqualToString:LDEventIDKey]) {
-                    event.id = value;
-                    self.lastEventID = event.id;
-                } else if ([key isEqualToString:LDEventRetryKey]) {
-                    self.retryInterval = [value doubleValue];
-                }
-            }
-        }
+    [self parseEventString:eventString];
+}
+
+- (void)parseEventString:(NSString*)eventString {
+    if (eventString.length == 0) { return; }
+    LDEventParser *parser = [[LDEventParser alloc] init];
+    LDEvent *event = [parser eventFromString:eventString];
+    if (event) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(messageQueue, ^{
+            [weakSelf _dispatchEvent:event];
+        });
+    }
+    if (parser.foundRetryInterval > 0.0) {
+        self.retryInterval = parser.foundRetryInterval;
+    }
+    if (parser.remainingEventString.length > 0) {
+        [self parseEventString:parser.remainingEventString];
     }
 }
 
@@ -319,7 +279,7 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
     }
 }
 
-- (CGFloat)increaseIntervalWithBackoff {
+- (NSTimeInterval)increaseIntervalWithBackoff {
     _retryAttempt++;
     return arc4random_uniform(MIN(ES_MAX_RECONNECT_TIME, _retryInterval * pow(2, _retryAttempt)));
 }
