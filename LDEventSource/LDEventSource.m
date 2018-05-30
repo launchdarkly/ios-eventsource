@@ -170,6 +170,7 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
         dispatch_async(messageQueue, ^{
             [weakSelf _dispatchEvent:event];
         });
+        self.lastEventID = event.id;
     }
     if (parser.foundRetryInterval > 0.0) {
         self.retryInterval = parser.foundRetryInterval;
