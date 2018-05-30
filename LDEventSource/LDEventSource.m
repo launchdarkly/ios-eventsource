@@ -8,6 +8,7 @@
 
 #import "LDEventSource.h"
 #import "LDEventParser.h"
+#import "LDDataAccumulator.h"
 
 static NSTimeInterval const ES_RETRY_INTERVAL = 1.0;
 static NSTimeInterval const ES_DEFAULT_TIMEOUT = 300.0;
@@ -34,6 +35,7 @@ static NSInteger const HTTPStatusCodeUnauthorized = 401;
 @property (nonatomic, strong) NSString *connectMethod;
 @property (nonatomic, strong) NSData *connectBody;
 @property (nonatomic, strong) id lastEventID;
+@property (nonatomic, strong) LDDataAccumulator *dataAccumulator;
 
 - (void)_open;
 - (void)_dispatchEvent:(LDEvent *)e;
@@ -70,24 +72,26 @@ static NSInteger const HTTPStatusCodeUnauthorized = 401;
 - (instancetype)initWithURL:(NSURL *)URL httpHeaders:(NSDictionary<NSString*, NSString *>*) headers timeoutInterval:(NSTimeInterval)timeoutInterval connectMethod:(NSString*)connectMethod connectBody:(NSData*)connectBody
 {
     self = [super init];
-    if (self) {
-        _listeners = [NSMutableDictionary dictionary];
-        _eventURL = URL;
-        _timeoutInterval = timeoutInterval;
-        _retryInterval = ES_RETRY_INTERVAL;
-        _retryAttempt = 0;
-        _httpRequestHeaders = headers;
-        _connectMethod = connectMethod;
-        _connectBody = connectBody;
-        messageQueue = dispatch_queue_create("com.launchdarkly.eventsource-queue", DISPATCH_QUEUE_SERIAL);
-        connectionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_retryInterval * NSEC_PER_SEC));
-        __weak typeof(self) weakSelf = self;
-        dispatch_after(popTime, connectionQueue, ^(void){
-            [weakSelf _open];
-        });
-    }
+    if (!self) { return nil; }
+
+    self.listeners = [NSMutableDictionary dictionary];
+    self.eventURL = URL;
+    self.timeoutInterval = timeoutInterval;
+    self.retryInterval = ES_RETRY_INTERVAL;
+    self.retryAttempt = 0;
+    _httpRequestHeaders = headers;
+    self.connectMethod = connectMethod;
+    self.connectBody = connectBody;
+    messageQueue = dispatch_queue_create("com.launchdarkly.eventsource-queue", DISPATCH_QUEUE_SERIAL);
+    connectionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    self.dataAccumulator = [[LDDataAccumulator alloc] init];
+
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_retryInterval * NSEC_PER_SEC));
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(popTime, connectionQueue, ^(void){
+        [weakSelf _open];
+    });
+
     return self;
 }
 
@@ -150,7 +154,11 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     NSString *eventString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self parseEventString:eventString];
+    [self.dataAccumulator accumulateDataWithString:eventString];
+    if ([self.dataAccumulator isReadyToParseEvent]) {
+        [self parseEventString:self.dataAccumulator.dataString];
+        [self.dataAccumulator reset];
+    }
 }
 
 - (void)parseEventString:(NSString*)eventString {

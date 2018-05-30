@@ -25,6 +25,8 @@
 		832C78801F291ACE00E334A2 /* LDEventSource-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 832C787F1F291ACE00E334A2 /* LDEventSource-Prefix.pch */; };
 		83620B8F20BEE51600F1F28E /* LDEventParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 83620B8D20BEE51600F1F28E /* LDEventParser.h */; };
 		83620B9020BEE51600F1F28E /* LDEventParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83620B8E20BEE51600F1F28E /* LDEventParser.m */; };
+		83620B9320BF14E000F1F28E /* LDDataAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 83620B9120BF14E000F1F28E /* LDDataAccumulator.h */; };
+		83620B9420BF14E000F1F28E /* LDDataAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83620B9220BF14E000F1F28E /* LDDataAccumulator.m */; };
 		83B975D11FD1C83300A4EF4E /* DarklyEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		832C787F1F291ACE00E334A2 /* LDEventSource-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LDEventSource-Prefix.pch"; path = "LDEventSource/LDEventSource-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		83620B8D20BEE51600F1F28E /* LDEventParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDEventParser.h; sourceTree = "<group>"; };
 		83620B8E20BEE51600F1F28E /* LDEventParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDEventParser.m; sourceTree = "<group>"; };
+		83620B9120BF14E000F1F28E /* LDDataAccumulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDDataAccumulator.h; sourceTree = "<group>"; };
+		83620B9220BF14E000F1F28E /* LDDataAccumulator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDDataAccumulator.m; sourceTree = "<group>"; };
 		83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarklyEventSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +141,8 @@
 				832C787B1F291AB300E334A2 /* LDEventSource.m */,
 				83620B8D20BEE51600F1F28E /* LDEventParser.h */,
 				83620B8E20BEE51600F1F28E /* LDEventParser.m */,
+				83620B9120BF14E000F1F28E /* LDDataAccumulator.h */,
+				83620B9220BF14E000F1F28E /* LDDataAccumulator.m */,
 				2838332F17A1BFFE00C0141D /* Supporting Files */,
 			);
 			path = LDEventSource;
@@ -187,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83620B8F20BEE51600F1F28E /* LDEventParser.h in Headers */,
+				83620B9320BF14E000F1F28E /* LDDataAccumulator.h in Headers */,
 				83B975D11FD1C83300A4EF4E /* DarklyEventSource.h in Headers */,
 				832C78801F291ACE00E334A2 /* LDEventSource-Prefix.pch in Headers */,
 				832C787A1F291AA700E334A2 /* LDEventSource.h in Headers */,
@@ -305,6 +312,7 @@
 			files = (
 				832C787C1F291AB300E334A2 /* LDEventSource.m in Sources */,
 				83620B9020BEE51600F1F28E /* LDEventParser.m in Sources */,
+				83620B9420BF14E000F1F28E /* LDDataAccumulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
