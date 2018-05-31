@@ -163,17 +163,18 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
 
 - (void)parseEventString:(NSString*)eventString {
     if (eventString.length == 0) { return; }
-    LDEventParser *parser = [[LDEventParser alloc] init];
-    LDEvent *event = [parser eventFromString:eventString];
-    if (event) {
+    LDEventParser *parser = [LDEventParser eventParserWithEventString:eventString];
+    if (parser.event) {
         __weak typeof(self) weakSelf = self;
         dispatch_async(messageQueue, ^{
-            [weakSelf _dispatchEvent:event];
+            [weakSelf _dispatchEvent:parser.event];
         });
-        self.lastEventID = event.id;
+        if (parser.event.id) {
+            self.lastEventID = parser.event.id;
+        }
     }
-    if (parser.foundRetryInterval > 0.0) {
-        self.retryInterval = parser.foundRetryInterval;
+    if (parser.retryInterval) {
+        self.retryInterval = [parser.retryInterval doubleValue];
     }
     if (parser.remainingEventString.length > 0) {
         [self parseEventString:parser.remainingEventString];
