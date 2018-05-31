@@ -8,7 +8,7 @@
 
 #import "LDEventSource.h"
 #import "LDEventParser.h"
-#import "LDDataAccumulator.h"
+#import "LDEventStringAccumulator.h"
 
 static NSTimeInterval const ES_RETRY_INTERVAL = 1.0;
 static NSTimeInterval const ES_DEFAULT_TIMEOUT = 300.0;
@@ -31,11 +31,11 @@ static NSInteger const HTTPStatusCodeUnauthorized = 401;
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 @property (nonatomic, assign) NSTimeInterval retryInterval;
 @property (nonatomic, assign) NSInteger retryAttempt;
-@property (readonly, nonatomic, strong) NSDictionary <NSString *, NSString *> *httpRequestHeaders;
+@property (nonatomic, strong) NSDictionary <NSString *, NSString *> *httpRequestHeaders;
 @property (nonatomic, strong) NSString *connectMethod;
 @property (nonatomic, strong) NSData *connectBody;
 @property (nonatomic, strong) id lastEventID;
-@property (nonatomic, strong) LDDataAccumulator *dataAccumulator;
+@property (nonatomic, strong) LDEventStringAccumulator *eventStringAccumulator;
 
 - (void)_open;
 - (void)_dispatchEvent:(LDEvent *)e;
@@ -79,12 +79,12 @@ static NSInteger const HTTPStatusCodeUnauthorized = 401;
     self.timeoutInterval = timeoutInterval;
     self.retryInterval = ES_RETRY_INTERVAL;
     self.retryAttempt = 0;
-    _httpRequestHeaders = headers;
+    self.httpRequestHeaders = headers;
     self.connectMethod = connectMethod;
     self.connectBody = connectBody;
     messageQueue = dispatch_queue_create("com.launchdarkly.eventsource-queue", DISPATCH_QUEUE_SERIAL);
     connectionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-    self.dataAccumulator = [[LDDataAccumulator alloc] init];
+    self.eventStringAccumulator = [[LDEventStringAccumulator alloc] init];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_retryInterval * NSEC_PER_SEC));
     __weak typeof(self) weakSelf = self;
@@ -154,10 +154,10 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     NSString *eventString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self.dataAccumulator accumulateDataWithString:eventString];
-    if ([self.dataAccumulator isReadyToParseEvent]) {
-        [self parseEventString:self.dataAccumulator.dataString];
-        [self.dataAccumulator reset];
+    [self.eventStringAccumulator accumulateEventStringWithString:eventString];
+    if ([self.eventStringAccumulator isReadyToParseEvent]) {
+        [self parseEventString:self.eventStringAccumulator.eventString];
+        [self.eventStringAccumulator reset];
     }
 }
 

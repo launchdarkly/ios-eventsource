@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LDEventParser.h"
 #import "LDEventSource.h"
+#import "NSString+LDEventSource.h"
+#import "NSArray+LDEventSource.h"
 
 static NSString *const ESKeyValueDelimiter = @":";
 
@@ -89,11 +91,11 @@ static NSString *const LDEventRetryKey = @"retry";
 }
 
 //extracts lines from the first thru the first empty line
--(NSArray<NSString*>*)linesToParseFromEventString {
+-(nullable NSArray<NSString*>*)linesToParseFromEventString {
     if (self.eventString.length == 0) { return nil; }
 
-    NSArray<NSString*> *lines = [self eventStringLines];
-    NSUInteger indexOfFirstEmptyLine = [self indexOfFirstEmptyEventStringLine];
+    NSArray<NSString*> *lines = [self.eventString lines];
+    NSUInteger indexOfFirstEmptyLine = [lines indexOfFirstEmptyLine];
     if (indexOfFirstEmptyLine == NSNotFound) { return nil; }
 
     NSArray<NSString*> *linesToParse = [lines subarrayWithRange:NSMakeRange(0, indexOfFirstEmptyLine + 1)];
@@ -122,14 +124,5 @@ static NSString *const LDEventRetryKey = @"retry";
 
     remainingEventString = [nonEmptyRemainingLines componentsJoinedByString:@"\n"];
     return remainingEventString;
-}
-
--(NSArray<NSString*>*)eventStringLines {
-    if (self.eventString.length == 0) { return nil; }
-    return [self.eventString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-}
-
--(NSUInteger)indexOfFirstEmptyEventStringLine {
-    return [[self eventStringLines] indexOfObject:@""];
 }
 @end

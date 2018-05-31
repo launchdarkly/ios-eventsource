@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LDDataAccumulator : NSObject
-@property (nonatomic, copy) NSString *dataString;
+@interface LDEventStringAccumulator : NSObject
+@property (nonatomic, copy) NSString *eventString;
 
--(void)accumulateDataWithString:(NSString*)dataString;
+-(void)accumulateEventStringWithString:(NSString*)eventString;
 -(BOOL)isReadyToParseEvent;
 -(void)reset;
 @end
