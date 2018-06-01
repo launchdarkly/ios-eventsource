@@ -14,4 +14,8 @@
     if (![self.firstObject isKindOfClass:[NSString class]]) { return NSNotFound; }
     return [self indexOfObject:@""];
 }
+-(NSArray*)subArrayFromIndex:(NSUInteger)index {
+    if (index >= (self.count - 1)) { return nil; }    //index is at or beyond the last element
+    return [self subarrayWithRange:NSMakeRange(index + 1, self.count - index - 1)];
+}
 @end

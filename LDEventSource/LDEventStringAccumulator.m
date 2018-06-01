@@ -6,7 +6,9 @@
 //  Copyright © 2018 Catamorphic Co. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "LDEventStringAccumulator.h"
+#import "LDEventParser.h"
 
 @implementation LDEventStringAccumulator
 -(void)accumulateEventStringWithString:(NSString*)eventString {
@@ -20,9 +22,7 @@
 
 -(BOOL)isReadyToParseEvent {
     if (self.eventString.length == 0) { return NO; }
-    NSArray<NSString*> *lines = [self.eventString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    if (lines.count == 0) { return NO; }
-    return [lines lastObject].length == 0;
+    return [self.eventString containsString:kLDEventSourceEventTerminator];
 }
 
 -(void)reset {

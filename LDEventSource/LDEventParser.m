@@ -19,6 +19,8 @@ static NSString *const LDEventIDKey = @"id";
 static NSString *const LDEventEventKey = @"event";
 static NSString *const LDEventRetryKey = @"retry";
 
+NSString * const kLDEventSourceEventTerminator = @"\n\n";
+
 @interface LDEventParser()
 @property (nonatomic, copy) NSString *eventString;
 @property (nonatomic, strong) LDEvent *event;
@@ -90,39 +92,38 @@ static NSString *const LDEventRetryKey = @"retry";
     }
 }
 
-//extracts lines from the first thru the first empty line
+//extracts lines from the first thru the event terminator
 -(nullable NSArray<NSString*>*)linesToParseFromEventString {
     if (self.eventString.length == 0) { return nil; }
+    if (![self.eventString containsString:kLDEventSourceEventTerminator]) { return nil; }
 
-    NSArray<NSString*> *lines = [self.eventString lines];
-    NSUInteger indexOfFirstEmptyLine = [lines indexOfFirstEmptyLine];
-    if (indexOfFirstEmptyLine == NSNotFound) { return nil; }
+    NSArray<NSString*> *eventStringParts = [self.eventString componentsSeparatedByString:kLDEventSourceEventTerminator];
+    if (eventStringParts.count == 0) { return nil; }    //This should never happen because the guard for the terminator's presence passed...defensive
+    NSString *eventStringToParse = [eventStringParts.firstObject stringByAppendingString:kLDEventSourceEventTerminator];
 
-    NSArray<NSString*> *linesToParse = [lines subarrayWithRange:NSMakeRange(0, indexOfFirstEmptyLine + 1)];
-    if (linesToParse.count == 0) { return nil; }
-
-    return linesToParse;
+    return [eventStringToParse lines];
 }
 
--(NSString*)remainingEventStringAfterParsingEventString {
+-(nullable NSString*)remainingEventStringAfterParsingEventString {
     if (self.eventString.length == 0) { return nil; }
+    if (![self.eventString containsString:kLDEventSourceEventTerminator]) { return self.eventString; }
 
-    NSArray<NSString*> *lines = [self.eventString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    NSUInteger indexOfFirstEmptyLine =  [lines indexOfObject:@""];
-    if (indexOfFirstEmptyLine == NSNotFound) { return [self.eventString copy]; }
-    if (indexOfFirstEmptyLine >= lines.count - 1) { return nil; }
+    NSArray<NSString*> *eventStringParts = [self.eventString componentsSeparatedByString:kLDEventSourceEventTerminator];
+    if (eventStringParts.count < 2) { return nil; }     //This should never happen because the guard for the terminator's presence passed...defensive
+    if (eventStringParts.count == 2 && eventStringParts[1].length == 0) { return nil; } //There is no remaining string after the terminator...this should be the normal exit
 
-    NSArray<NSString*> *remainingLines = [lines subarrayWithRange:NSMakeRange(indexOfFirstEmptyLine + 1, lines.count - indexOfFirstEmptyLine - 1)];
-    NSString *remainingEventString = @"";
-    NSPredicate *nonemptyLinePredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+    NSArray<NSString*> *remainingEventStringParts = [eventStringParts subArrayFromIndex:1];
+    NSPredicate *nonemptyStringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         if (![evaluatedObject isKindOfClass:[NSString class]]) { return NO; }
         NSString *evaluatedString = evaluatedObject;
         return evaluatedString.length > 0;
     }];
-    NSArray<NSString*> *nonEmptyRemainingLines = [remainingLines filteredArrayUsingPredicate:nonemptyLinePredicate];
-    if (nonEmptyRemainingLines.count == 0) { return nil; }
+    NSArray<NSString*> *nonEmptyRemainingEventStringParts = [remainingEventStringParts filteredArrayUsingPredicate:nonemptyStringPredicate];
+    NSString *remainingEventString = [nonEmptyRemainingEventStringParts componentsJoinedByString:kLDEventSourceEventTerminator];
+    if (remainingEventString.length == 0) {
+        return nil;
+    }
 
-    remainingEventString = [nonEmptyRemainingLines componentsJoinedByString:@"\n"];
     return remainingEventString;
 }
 @end
