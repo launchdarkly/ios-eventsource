@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C86CDDAA7CC6B6EC25C6083 /* Pods_DarklyEventSourceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5614E45F66810A4F1509C0AC /* Pods_DarklyEventSourceTests.framework */; };
-		24A8A2339E292887B628BBDB /* Pods_DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B70985DD38EDD6578B7349FF /* Pods_DarklyEventSource.framework */; };
-		2817148A1DD736A200F7A8E0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2838333F17A1C02900C0141D /* UIKit.framework */; };
 		2838334117A1C02900C0141D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2838332C17A1BFFE00C0141D /* Foundation.framework */; };
-		2838334317A1C02900C0141D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2838334217A1C02900C0141D /* CoreGraphics.framework */; };
 		2838334917A1C02900C0141D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2838334717A1C02900C0141D /* InfoPlist.strings */; };
 		2838334B17A1C02900C0141D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838334A17A1C02900C0141D /* main.m */; };
 		2838334F17A1C02900C0141D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838334E17A1C02900C0141D /* AppDelegate.m */; };
@@ -41,6 +37,7 @@
 		83620B9C20C0A9EC00F1F28E /* NSArray+LDEventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 83620B9A20C0A9EC00F1F28E /* NSArray+LDEventSource.m */; };
 		8364C58320EC120D00210EAE /* testEventWithSpaces.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8364C58220EC120D00210EAE /* testEventWithSpaces.txt */; };
 		83B975D11FD1C83300A4EF4E /* DarklyEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EDC66098619F9E9C9907365A /* Pods_DarklyEventSourceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1855D8187242D352F67D5139 /* Pods_DarklyEventSourceTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,10 +72,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1855D8187242D352F67D5139 /* Pods_DarklyEventSourceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DarklyEventSourceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2838332C17A1BFFE00C0141D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2838333E17A1C02900C0141D /* EventViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2838333F17A1C02900C0141D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2838334217A1C02900C0141D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2838334617A1C02900C0141D /* EventViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EventViewer-Info.plist"; sourceTree = "<group>"; };
 		2838334817A1C02900C0141D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2838334A17A1C02900C0141D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,8 +87,6 @@
 		2838335617A1C02900C0141D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2838335717A1C02900C0141D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2838335A17A1C02900C0141D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		5614E45F66810A4F1509C0AC /* Pods_DarklyEventSourceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DarklyEventSourceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CCBCFEF4832E51726D4FF4B /* Pods-DarklyEventSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSource/Pods-DarklyEventSource.debug.xcconfig"; sourceTree = "<group>"; };
 		69DE1C251E61765000CF816C /* DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		832C78791F291AA700E334A2 /* LDEventSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LDEventSource.h; path = LDEventSource/LDEventSource.h; sourceTree = SOURCE_ROOT; };
 		832C787B1F291AB300E334A2 /* LDEventSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LDEventSource.m; path = LDEventSource/LDEventSource.m; sourceTree = SOURCE_ROOT; };
@@ -117,10 +111,8 @@
 		83620B9A20C0A9EC00F1F28E /* NSArray+LDEventSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LDEventSource.m"; sourceTree = "<group>"; };
 		8364C58220EC120D00210EAE /* testEventWithSpaces.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testEventWithSpaces.txt; sourceTree = "<group>"; };
 		83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarklyEventSource.h; sourceTree = "<group>"; };
-		965A4FBFACF1B791CE40F743 /* Pods-DarklyEventSourceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSourceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B70985DD38EDD6578B7349FF /* Pods_DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7DE4C574F00F26FED405122 /* Pods-DarklyEventSourceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSourceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests.release.xcconfig"; sourceTree = "<group>"; };
-		D95F7E18532A3C0D44E236B3 /* Pods-DarklyEventSource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSource.release.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSource/Pods-DarklyEventSource.release.xcconfig"; sourceTree = "<group>"; };
+		8DE5C853D572C56CE29ED5F8 /* Pods-DarklyEventSourceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSourceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CDB9A18E68C90D6B6D9EF54A /* Pods-DarklyEventSourceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSourceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,9 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69DE1C2C1E61765000CF816C /* DarklyEventSource.framework in Frameworks */,
-				2817148A1DD736A200F7A8E0 /* UIKit.framework in Frameworks */,
 				2838334117A1C02900C0141D /* Foundation.framework in Frameworks */,
-				2838334317A1C02900C0141D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A8A2339E292887B628BBDB /* Pods_DarklyEventSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				835B123F20E65DF8009C2ACB /* DarklyEventSource.framework in Frameworks */,
-				0C86CDDAA7CC6B6EC25C6083 /* Pods_DarklyEventSourceTests.framework in Frameworks */,
+				EDC66098619F9E9C9907365A /* Pods_DarklyEventSourceTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +152,7 @@
 				835B123420E5A31A009C2ACB /* DarklyEventSourceTests */,
 				2838332B17A1BFFE00C0141D /* Frameworks */,
 				2838332A17A1BFFE00C0141D /* Products */,
-				9B568A3E1F201B32FC2414E3 /* Pods */,
+				44CADEFF622525D649E4BAEF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,10 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				2838332C17A1BFFE00C0141D /* Foundation.framework */,
-				2838333F17A1C02900C0141D /* UIKit.framework */,
-				2838334217A1C02900C0141D /* CoreGraphics.framework */,
-				B70985DD38EDD6578B7349FF /* Pods_DarklyEventSource.framework */,
-				5614E45F66810A4F1509C0AC /* Pods_DarklyEventSourceTests.framework */,
+				1855D8187242D352F67D5139 /* Pods_DarklyEventSourceTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,6 +230,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		44CADEFF622525D649E4BAEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8DE5C853D572C56CE29ED5F8 /* Pods-DarklyEventSourceTests.debug.xcconfig */,
+				CDB9A18E68C90D6B6D9EF54A /* Pods-DarklyEventSourceTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		835B123420E5A31A009C2ACB /* DarklyEventSourceTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,17 +269,6 @@
 				835B124D20E6A936009C2ACB /* LDEventSource+Testable.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		9B568A3E1F201B32FC2414E3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5CCBCFEF4832E51726D4FF4B /* Pods-DarklyEventSource.debug.xcconfig */,
-				D95F7E18532A3C0D44E236B3 /* Pods-DarklyEventSource.release.xcconfig */,
-				965A4FBFACF1B791CE40F743 /* Pods-DarklyEventSourceTests.debug.xcconfig */,
-				C7DE4C574F00F26FED405122 /* Pods-DarklyEventSourceTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,12 +314,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69DE1C301E61765000CF816C /* Build configuration list for PBXNativeTarget "DarklyEventSource" */;
 			buildPhases = (
-				8E917DB4A72946F9D0C1CA5E /* [CP] Check Pods Manifest.lock */,
 				69DE1C201E61765000CF816C /* Sources */,
 				69DE1C211E61765000CF816C /* Frameworks */,
 				69DE1C221E61765000CF816C /* Headers */,
 				69DE1C231E61765000CF816C /* Resources */,
-				5EDF33B8A146DCF36C0525A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -350,12 +332,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 835B123A20E5A31A009C2ACB /* Build configuration list for PBXNativeTarget "DarklyEventSourceTests" */;
 			buildPhases = (
-				4C5345E5743908539B3469F7 /* [CP] Check Pods Manifest.lock */,
+				F7892E50DA276A45BC668855 /* [CP] Check Pods Manifest.lock */,
 				835B122F20E5A319009C2ACB /* Sources */,
 				835B123020E5A319009C2ACB /* Frameworks */,
 				835B123120E5A319009C2ACB /* Resources */,
-				C637BBDE0DB3B1944B24AAB4 /* [CP] Embed Pods Frameworks */,
-				2AB2CE9FDDB91E5291C170A4 /* [CP] Copy Pods Resources */,
+				B152A38C9EC9EA6FF7527908 /* [CP] Embed Pods Frameworks */,
+				B599EA3A3CD6A2D759F79719 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -437,73 +419,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2AB2CE9FDDB91E5291C170A4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4C5345E5743908539B3469F7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DarklyEventSourceTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5EDF33B8A146DCF36C0525A0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DarklyEventSource/Pods-DarklyEventSource-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8E917DB4A72946F9D0C1CA5E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DarklyEventSource-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C637BBDE0DB3B1944B24AAB4 /* [CP] Embed Pods Frameworks */ = {
+		B152A38C9EC9EA6FF7527908 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -519,6 +435,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B599EA3A3CD6A2D759F79719 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7892E50DA276A45BC668855 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DarklyEventSourceTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -719,7 +668,6 @@
 		};
 		69DE1C2E1E61765000CF816C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CCBCFEF4832E51726D4FF4B /* Pods-DarklyEventSource.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -755,7 +703,6 @@
 		};
 		69DE1C2F1E61765000CF816C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D95F7E18532A3C0D44E236B3 /* Pods-DarklyEventSource.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -793,7 +740,7 @@
 		};
 		835B123820E5A31A009C2ACB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 965A4FBFACF1B791CE40F743 /* Pods-DarklyEventSourceTests.debug.xcconfig */;
+			baseConfigurationReference = 8DE5C853D572C56CE29ED5F8 /* Pods-DarklyEventSourceTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -826,7 +773,7 @@
 		};
 		835B123920E5A31A009C2ACB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7DE4C574F00F26FED405122 /* Pods-DarklyEventSourceTests.release.xcconfig */;
+			baseConfigurationReference = CDB9A18E68C90D6B6D9EF54A /* Pods-DarklyEventSourceTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
