@@ -21,7 +21,7 @@
 -(void)testParseString {
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
     NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
+    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters: \n\n
     LDEventParser *parser = [LDEventParser eventParserWithEventString:putEventString];
     LDEvent *event = parser.event;
 

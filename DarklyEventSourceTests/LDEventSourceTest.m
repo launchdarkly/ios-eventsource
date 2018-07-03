@@ -12,10 +12,24 @@
 #import "LDEventSource+Testable.h"
 #import "NSString+Testable.h"
 
+@interface NSString(LDEventSourceTest)
+@property (nonatomic, readonly, copy) NSString *eventDataString;
+@end
+
+@implementation NSString(LDEventSourceTest)
+-(NSString*)eventDataString {
+    NSString *eventData = [[self componentsSeparatedByString:@"data:"] lastObject];
+    eventData = [eventData substringToIndex:eventData.length - 2]; //chop off the last 2 characters
+    return eventData;
+}
+@end
+
 @interface LDEventSource(Testable_LDEventSourceTest)
 -(void)parseEventString:(NSString*)eventString;
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data;
 @end
+
+NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
 
 @interface LDEventSourceTest : XCTestCase
 
@@ -23,23 +37,30 @@
 
 @implementation LDEventSourceTest
 
-- (void)testParseEventString {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
+-(XCTestExpectation*)expectationWithMethodName:(NSString*)methodName expectationName:(NSString*)expectationName {
+    return [self expectationWithDescription:[NSString stringWithFormat:@"%@.%@.%@", NSStringFromClass([self class]), methodName, expectationName]];
+}
 
+-(void)stubResponseWithData:(NSData*)data {
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
         return [request.URL.host isEqualToString:dummyClientStreamHost];
     } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:200 headers:nil];
+        return [OHHTTPStubsResponse responseWithData:data statusCode:200 headers:nil];
     }];
+}
 
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testParseEventString.eventExpectation"];
+-(void)tearDown {
+    [OHHTTPStubs removeAllStubs];
 
+    [super tearDown];
+}
+
+- (void)testParseEventString {
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
-
-    NSURL *eventSourceUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]];
-    LDEventSource *eventSource = [LDEventSource eventSourceWithURL:eventSourceUrl httpHeaders:nil];
+    NSString *putEventData = putEventString.eventDataString;
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
+    LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
         XCTAssertEqualObjects(event.event, @"put");
@@ -51,25 +72,16 @@
 
     [eventSource parseEventString:putEventString];
 
-    [self waitForExpectations:@[eventExpectation] timeout:1.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 - (void)testEventSourceWithUrl {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
-
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
-
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
-        return [request.URL.host isEqualToString:dummyClientStreamHost];
-    } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[putEventString dataUsingEncoding:NSUTF8StringEncoding] statusCode:200 headers:nil];
-    }];
-
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testEventSourceWithUrl.eventExpectation"];
-
+    NSString *putEventData = putEventString.eventDataString;
+    [self stubResponseWithData:[putEventString dataUsingEncoding:NSUTF8StringEncoding]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
@@ -80,25 +92,16 @@
         [eventExpectation fulfill];
     }];
 
-    [self waitForExpectations:@[eventExpectation] timeout:2.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 -(void)testDidReceiveData_singleCall {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
-
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
-
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
-        return [request.URL.host isEqualToString:dummyClientStreamHost];
-    } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:200 headers:nil];
-    }];
-
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testDidReceiveData_singleCall.eventExpectation"];
-
+    NSString *putEventData = putEventString.eventDataString;
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
@@ -111,26 +114,17 @@
 
     [eventSource URLSession:eventSource.session dataTask:eventSource.eventSourceTask didReceiveData:[putEventString dataUsingEncoding:NSUTF8StringEncoding]];
 
-    [self waitForExpectations:@[eventExpectation] timeout:2.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 -(void)testDidReceiveData_multipleCalls_evenParts {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
-
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
+    NSString *putEventData = putEventString.eventDataString;
     NSArray *putEventStringParts = [putEventString splitIntoEqualParts:30];
-
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
-        return [request.URL.host isEqualToString:dummyClientStreamHost];
-    } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:200 headers:nil];
-    }];
-
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testDidReceiveData_multipleCalls.eventExpectation"];
-
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
@@ -145,26 +139,17 @@
         [eventSource URLSession:eventSource.session dataTask:eventSource.eventSourceTask didReceiveData:[eventStringPart dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
-    [self waitForExpectations:@[eventExpectation] timeout:2.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 -(void)testDidReceiveData_multipleCalls_randomParts {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
-
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
+    NSString *putEventData = putEventString.eventDataString;
     NSArray *putEventStringParts = [putEventString splitIntoPartsApproximatelySized:1024];
-
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
-        return [request.URL.host isEqualToString:dummyClientStreamHost];
-    } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:200 headers:nil];
-    }];
-
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testDidReceiveData_multipleCalls.eventExpectation"];
-
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
@@ -179,29 +164,20 @@
         [eventSource URLSession:eventSource.session dataTask:eventSource.eventSourceTask didReceiveData:[eventStringPart dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
-    [self waitForExpectations:@[eventExpectation] timeout:2.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 -(void)testDidReceiveData_extraNewLine {
-    NSString *dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
-
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
     NSMutableArray *putEventStringParts = [NSMutableArray arrayWithArray:[putEventString componentsSeparatedByString:@":\""]];
     NSUInteger selectedIndex = arc4random_uniform((uint32_t)putEventStringParts.count - 1) + 1;
     putEventStringParts[selectedIndex] = [NSString stringWithFormat:@"\n\n%@", putEventStringParts[selectedIndex]];
     NSString *putEventStringWithExtraNewLine = [putEventStringParts componentsJoinedByString:@":\""];
-    NSString *putEventData = [[putEventStringWithExtraNewLine componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters
-
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * _Nonnull request) {
-        return [request.URL.host isEqualToString:dummyClientStreamHost];
-    } withStubResponse:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
-        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:200 headers:nil];
-    }];
-
-    XCTestExpectation *eventExpectation = [self expectationWithDescription:@"LDEventSourceTest.testDidReceiveData_extraNewLine.eventExpectation"];
-
+    NSString *putEventData = putEventStringWithExtraNewLine.eventDataString;
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
@@ -214,8 +190,9 @@
 
     [eventSource URLSession:eventSource.session dataTask:eventSource.eventSourceTask didReceiveData:[putEventStringWithExtraNewLine dataUsingEncoding:NSUTF8StringEncoding]];
 
-    [self waitForExpectations:@[eventExpectation] timeout:2.0];
-    [OHHTTPStubs removeAllStubs];
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
 }
 
 @end
