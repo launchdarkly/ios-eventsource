@@ -39,6 +39,7 @@
 		83620B9820C0A89100F1F28E /* NSString+LDEventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 83620B9620C0A89100F1F28E /* NSString+LDEventSource.m */; };
 		83620B9B20C0A9EC00F1F28E /* NSArray+LDEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 83620B9920C0A9EC00F1F28E /* NSArray+LDEventSource.h */; };
 		83620B9C20C0A9EC00F1F28E /* NSArray+LDEventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 83620B9A20C0A9EC00F1F28E /* NSArray+LDEventSource.m */; };
+		8364C58320EC120D00210EAE /* testEventWithSpaces.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8364C58220EC120D00210EAE /* testEventWithSpaces.txt */; };
 		83B975D11FD1C83300A4EF4E /* DarklyEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		83620B9620C0A89100F1F28E /* NSString+LDEventSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LDEventSource.m"; sourceTree = "<group>"; };
 		83620B9920C0A9EC00F1F28E /* NSArray+LDEventSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+LDEventSource.h"; sourceTree = "<group>"; };
 		83620B9A20C0A9EC00F1F28E /* NSArray+LDEventSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LDEventSource.m"; sourceTree = "<group>"; };
+		8364C58220EC120D00210EAE /* testEventWithSpaces.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testEventWithSpaces.txt; sourceTree = "<group>"; };
 		83B975D01FD1C83300A4EF4E /* DarklyEventSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarklyEventSource.h; sourceTree = "<group>"; };
 		965A4FBFACF1B791CE40F743 /* Pods-DarklyEventSourceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarklyEventSourceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarklyEventSourceTests/Pods-DarklyEventSourceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B70985DD38EDD6578B7349FF /* Pods_DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				835B124320E66837009C2ACB /* largePutEvent.txt */,
+				8364C58220EC120D00210EAE /* testEventWithSpaces.txt */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8364C58320EC120D00210EAE /* testEventWithSpaces.txt in Resources */,
 				835B124420E66837009C2ACB /* largePutEvent.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
