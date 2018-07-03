@@ -112,17 +112,8 @@ NSString * const kLDEventSourceEventTerminator = @"\n\n";
     if (eventStringParts.count < 2) { return nil; }     //This should never happen because the guard for the terminator's presence passed...defensive
     if (eventStringParts.count == 2 && eventStringParts[1].length == 0) { return nil; } //There is no remaining string after the terminator...this should be the normal exit
 
-    NSArray<NSString*> *remainingEventStringParts = [eventStringParts subArrayFromIndex:1];
-    NSPredicate *nonemptyStringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        if (![evaluatedObject isKindOfClass:[NSString class]]) { return NO; }
-        NSString *evaluatedString = evaluatedObject;
-        return evaluatedString.length > 0;
-    }];
-    NSArray<NSString*> *nonEmptyRemainingEventStringParts = [remainingEventStringParts filteredArrayUsingPredicate:nonemptyStringPredicate];
-    NSString *remainingEventString = [nonEmptyRemainingEventStringParts componentsJoinedByString:kLDEventSourceEventTerminator];
-    if (remainingEventString.length == 0) {
-        return nil;
-    }
+    NSString *remainingEventString = [[eventStringParts subArrayFromIndex:1] componentsJoinedByString:LDEventSourceEventTerminator];
+    if (remainingEventString.length == 0) { return nil; }
 
     return remainingEventString;
 }
