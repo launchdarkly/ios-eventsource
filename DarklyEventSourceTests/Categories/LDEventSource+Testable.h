@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "LDEventSource.h"
+#import "LDEventStringAccumulator.h"
 
 @interface LDEventSource(Testable)
 @property (nonatomic, strong) NSURLSessionDataTask *eventSourceTask;
 @property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) LDEventStringAccumulator *eventStringAccumulator;
+
 @end

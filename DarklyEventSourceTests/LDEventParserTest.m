@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "LDEventSource.h"
 #import "LDEventParser.h"
+#import "NSString+LDEventSource.h"
 #import "NSString+Testable.h"
 
 @interface LDEventParserTest : XCTestCase
@@ -31,5 +32,18 @@
     XCTAssertEqual(event.readyState, kEventStateOpen);
     XCTAssertNil(parser.remainingEventString);
     XCTAssertNil(parser.retryInterval);
+}
+
+-(void)testHasEventTerminator_shortString {
+    NSString *eventString = nil;
+    XCTAssertFalse(eventString.hasEventTerminator);
+    eventString = @"";
+    XCTAssertFalse(eventString.hasEventTerminator);
+    eventString = @"\n";
+    XCTAssertFalse(eventString.hasEventTerminator);
+    eventString = @"\n\0";
+    XCTAssertFalse(eventString.hasEventTerminator);
+    eventString = @"\n\n";
+    XCTAssertTrue(eventString.hasEventTerminator);
 }
 @end

@@ -11,4 +11,5 @@
 @implementation LDEventSource(Testable)
 @dynamic eventSourceTask;
 @dynamic session;
+@dynamic eventStringAccumulator;
 @end
