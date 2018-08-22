@@ -218,4 +218,39 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     }];
 }
 
+-(void)testDidReceiveData_multipleThreads {
+    NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
+    NSArray *putEventStringParts = [putEventString splitIntoEqualParts:30];
+    [self stubResponseWithData:[NSData data]];
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
+    dispatch_queue_t eventSourceQueue = dispatch_queue_create("com.launchdarkly.test.didReceiveData.multipleThreads.eventSource", DISPATCH_QUEUE_SERIAL);
+    __block LDEventSource *eventSource;
+    dispatch_sync(eventSourceQueue, ^{
+        eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
+    });
+
+    [eventSource onMessage:^(LDEvent *event) {
+        XCTAssertNotNil(event);
+        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
+        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqual(event.readyState, kEventStateOpen);
+
+        [eventExpectation fulfill];
+    }];
+
+    NSInteger partCount = 0;
+    for (NSString *eventStringPart in putEventStringParts) {
+        partCount++;
+        NSString *eventStringPartCopy = [eventStringPart copy];
+        dispatch_async(eventSourceQueue, ^{
+            [eventSource URLSession:eventSource.session dataTask:eventSource.eventSourceTask didReceiveData:[eventStringPartCopy dataUsingEncoding:NSUTF8StringEncoding]];
+        });
+    }
+
+    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
+
+}
+
 @end

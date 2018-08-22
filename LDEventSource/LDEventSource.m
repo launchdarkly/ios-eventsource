@@ -158,9 +158,9 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
     @synchronized(self) {
         [self.eventStringAccumulator accumulateEventStringWithString:eventString];
         if ([self.eventStringAccumulator isReadyToParseEvent]) {
-            NSString *eventString = [self.eventStringAccumulator.eventString copy];
+            NSString *accumulatedEventString = [self.eventStringAccumulator.eventString copy];
             [self.eventStringAccumulator reset];
-            [self parseEventString:eventString];
+            [self parseEventString:accumulatedEventString];
         }
     }
 }
