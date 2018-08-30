@@ -1,4 +1,4 @@
-# config file version: 0.0.2
+# config file version: 1.0.0
 version: 2
 jobs:
   build:
@@ -49,11 +49,11 @@ jobs:
         name: Clean, Build, & Test
         command: set -o pipefail && xcodebuild clean build test -workspace 'LDEventSource.xcworkspace' -scheme 'DarklyEventSource' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE= | tee 'xcode_raw.log' | xcpretty --color --report html --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/report.html' --report junit --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/xcode/report.junit'
 
-    #- run:
-    #    name: CocoaPods lib lint
-    #    command: |
-    #        curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-    #        bundle exec pod lib lint
+    - run:
+        name: CocoaPods lib lint
+        command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            bundle exec pod lib lint
 
     - run:
         name: CocoaPods spec lint
