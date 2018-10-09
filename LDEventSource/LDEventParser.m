@@ -75,7 +75,7 @@
                     event.id = value;
                 } else if ([key isEqualToString:LDEventKeyRetry]) {
                     if ([value isKindOfClass:[NSNumber class]]) {
-                        self.retryInterval = @([value doubleValue]);
+                        self.retryInterval = @([value doubleValue]/1000);
                     }
                 }
             }
