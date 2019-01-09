@@ -40,7 +40,7 @@ extern NSString *const LDEventSourceErrorDomain;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-typedef void (^LDEventSourceEventHandler)(LDEvent *event);
+typedef void (^LDEventSourceEventHandler)(LDEvent * _Nullable event);
 
 // ---------------------------------------------------------------------------------------------------------------------
 
