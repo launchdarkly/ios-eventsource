@@ -84,23 +84,18 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     }];
 }
 
-- (void)testEventSourceWithUrl {
+- (void)testOpen {
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
     [self stubResponseWithData:[putEventString dataUsingEncoding:NSUTF8StringEncoding]];
-    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
         XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
         XCTAssertEqualObjects(event.data, putEventString.eventDataString);
         XCTAssertEqual(event.readyState, kEventStateOpen);
-
-        [eventExpectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
-        eventExpectation = nil;
-    }];
+    [eventSource open];
 }
 
 -(void)testDidReceiveData_singleCall {
