@@ -12,6 +12,7 @@
 #import "LDEventParser.h"
 #import "NSString+LDEventSource.h"
 #import "NSString+Testable.h"
+#import "NSString+LDEvent+Testable.h"
 
 @interface LDEventParserTest : XCTestCase
 
@@ -21,14 +22,27 @@
 
 -(void)testParseString {
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
-    NSString *putEventData = [[putEventString componentsSeparatedByString:@"data:"] lastObject];
-    putEventData = [putEventData substringToIndex:putEventData.length - 2]; //chop off the last 2 characters: \n\n
     LDEventParser *parser = [LDEventParser eventParserWithEventString:putEventString];
     LDEvent *event = parser.event;
 
     XCTAssertNotNil(event);
-    XCTAssertEqualObjects(event.event, @"put");
-    XCTAssertEqualObjects(event.data, putEventData);
+    XCTAssertEqualObjects(event.id, putEventString.eventId);          //largePutEvent
+    XCTAssertEqualObjects(event.event, putEventString.eventEvent);    //put
+    XCTAssertEqualObjects(event.data, putEventString.eventData);      //too long for here!!
+    XCTAssertEqual(event.readyState, kEventStateOpen);
+    XCTAssertNil(parser.remainingEventString);
+    XCTAssertEqualObjects(parser.retryInterval, @([putEventString.eventRetry integerValue] / MILLISEC_PER_SEC));   //5.0
+}
+
+-(void)testParseString_badRetry {
+    NSString *putEventString = [NSString stringFromFileNamed:@"putEvent_badRetry"];
+    LDEventParser *parser = [LDEventParser eventParserWithEventString:putEventString];
+    LDEvent *event = parser.event;
+
+    XCTAssertNotNil(event);
+    XCTAssertEqualObjects(event.id, putEventString.eventId);            //putEvent_badRetry
+    XCTAssertEqualObjects(event.event, [putEventString eventEvent]);    //put
+    XCTAssertEqualObjects(event.data, [putEventString eventData]);      //see fixture
     XCTAssertEqual(event.readyState, kEventStateOpen);
     XCTAssertNil(parser.remainingEventString);
     XCTAssertNil(parser.retryInterval);

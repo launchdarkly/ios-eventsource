@@ -12,27 +12,11 @@
 #import "LDEventSource+Testable.h"
 #import "NSString+LDEventSource.h"
 #import "NSString+Testable.h"
-
-@interface NSString(LDEventSourceTest)
-@property (nonatomic, readonly, copy) NSString *eventMessageString;
-@property (nonatomic, readonly, copy) NSString *eventDataString;
-@end
-
-@implementation NSString(LDEventSourceTest)
--(NSString*)eventMessageString {
-    NSString *eventRemainder = [[self componentsSeparatedByString:[LDEventKeyEvent stringByAppendingString:LDEventSourceKeyValueDelimiter]] lastObject];
-    NSString *eventMessage = [[eventRemainder componentsSeparatedByString:[LDEventKeyData stringByAppendingString:LDEventSourceKeyValueDelimiter]] firstObject];
-    eventMessage = [eventMessage stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return eventMessage;
-}
--(NSString*)eventDataString {
-    NSString *eventData = [[self componentsSeparatedByString:@"data:"] lastObject];
-    eventData = [eventData stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return eventData;
-}
-@end
+#import "NSString+LDEvent+Testable.h"
 
 @interface LDEventSource(Testable_LDEventSourceTest)
+@property (nonatomic, assign) NSTimeInterval retryInterval;
+
 -(void)parseEventString:(NSString*)eventString;
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data;
 @end
@@ -70,8 +54,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -82,6 +67,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 - (void)testOpen {
@@ -90,9 +76,11 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
+        XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
     }];
 
     [eventSource open];
@@ -105,8 +93,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -117,6 +106,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 -(void)testDidReceiveData_multipleCalls_evenParts {
@@ -127,8 +117,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -141,6 +132,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 -(void)testDidReceiveData_multipleCalls_randomParts {
@@ -151,8 +143,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -165,6 +158,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 -(void)testDidReceiveData_extraNewLine {
@@ -176,10 +170,12 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self stubResponseWithData:[NSData data]];
     __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
+    NSTimeInterval originalRetryInterval = eventSource.retryInterval;
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertTrue([putEventStringWithExtraNewLine.eventDataString hasPrefix:event.data]);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertTrue([putEventStringWithExtraNewLine.eventData hasPrefix:event.data]);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -190,6 +186,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, originalRetryInterval);     //No change because retry is after the extra newline
 }
 
 -(void)testDidReceiveData_extraSpaces {
@@ -199,8 +196,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, eventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, eventString.eventDataString);
+        XCTAssertEqualObjects(event.id, eventString.eventId);
+        XCTAssertEqualObjects(event.event, eventString.eventEvent);
+        XCTAssertEqualObjects(event.data, eventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -211,6 +209,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
+    XCTAssertEqual(eventSource.retryInterval, [eventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 -(void)testDidReceiveData_multipleThreads {
@@ -226,8 +225,9 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
 
     [eventSource onMessage:^(LDEvent *event) {
         XCTAssertNotNil(event);
-        XCTAssertEqualObjects(event.event, putEventString.eventMessageString);
-        XCTAssertEqualObjects(event.data, putEventString.eventDataString);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
         XCTAssertEqual(event.readyState, kEventStateOpen);
 
         [eventExpectation fulfill];
@@ -245,7 +245,7 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
         eventExpectation = nil;
     }];
-
+    XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
 }
 
 @end

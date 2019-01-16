@@ -21,6 +21,8 @@
 		832C787A1F291AA700E334A2 /* LDEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 832C78791F291AA700E334A2 /* LDEventSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		832C787C1F291AB300E334A2 /* LDEventSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 832C787B1F291AB300E334A2 /* LDEventSource.m */; };
 		832C78801F291ACE00E334A2 /* LDEventSource-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 832C787F1F291ACE00E334A2 /* LDEventSource-Prefix.pch */; };
+		8347BB0721EEB45400E56BCD /* putEvent_badRetry.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8347BB0621EEB45400E56BCD /* putEvent_badRetry.txt */; };
+		8347BB0A21EF7F2700E56BCD /* NSString+LDEvent+Testable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8347BB0921EF7F2700E56BCD /* NSString+LDEvent+Testable.m */; };
 		835B123C20E6557B009C2ACB /* LDEventParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B123B20E6557B009C2ACB /* LDEventParserTest.m */; };
 		835B123F20E65DF8009C2ACB /* DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69DE1C251E61765000CF816C /* DarklyEventSource.framework */; };
 		835B124120E666C2009C2ACB /* LDEventSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 835B124020E666C2009C2ACB /* LDEventSourceTest.m */; };
@@ -92,6 +94,9 @@
 		832C787B1F291AB300E334A2 /* LDEventSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LDEventSource.m; path = LDEventSource/LDEventSource.m; sourceTree = SOURCE_ROOT; };
 		832C787D1F291AC000E334A2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LDEventSource/Info.plist; sourceTree = SOURCE_ROOT; };
 		832C787F1F291ACE00E334A2 /* LDEventSource-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LDEventSource-Prefix.pch"; path = "LDEventSource/LDEventSource-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		8347BB0621EEB45400E56BCD /* putEvent_badRetry.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = putEvent_badRetry.txt; sourceTree = "<group>"; };
+		8347BB0821EF7F2700E56BCD /* NSString+LDEvent+Testable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LDEvent+Testable.h"; sourceTree = "<group>"; };
+		8347BB0921EF7F2700E56BCD /* NSString+LDEvent+Testable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LDEvent+Testable.m"; sourceTree = "<group>"; };
 		835B123320E5A319009C2ACB /* DarklyEventSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarklyEventSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		835B123720E5A31A009C2ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		835B123B20E6557B009C2ACB /* LDEventParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDEventParserTest.m; sourceTree = "<group>"; };
@@ -254,6 +259,7 @@
 		835B124220E66716009C2ACB /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				8347BB0621EEB45400E56BCD /* putEvent_badRetry.txt */,
 				835B124320E66837009C2ACB /* largePutEvent.txt */,
 				8364C58220EC120D00210EAE /* testEventWithSpaces.txt */,
 			);
@@ -263,6 +269,8 @@
 		835B124520E668C1009C2ACB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8347BB0821EF7F2700E56BCD /* NSString+LDEvent+Testable.h */,
+				8347BB0921EF7F2700E56BCD /* NSString+LDEvent+Testable.m */,
 				835B124620E668EE009C2ACB /* NSString+Testable.h */,
 				835B124720E668EE009C2ACB /* NSString+Testable.m */,
 				835B124920E689EF009C2ACB /* LDEventSource+Testable.h */,
@@ -412,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8364C58320EC120D00210EAE /* testEventWithSpaces.txt in Resources */,
+				8347BB0721EEB45400E56BCD /* putEvent_badRetry.txt in Resources */,
 				835B124420E66837009C2ACB /* largePutEvent.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +510,7 @@
 			files = (
 				835B123C20E6557B009C2ACB /* LDEventParserTest.m in Sources */,
 				835B124E20E6A936009C2ACB /* LDEventSource+Testable.m in Sources */,
+				8347BB0A21EF7F2700E56BCD /* NSString+LDEvent+Testable.m in Sources */,
 				835B124820E668EE009C2ACB /* NSString+Testable.m in Sources */,
 				835B124120E666C2009C2ACB /* LDEventSourceTest.m in Sources */,
 			);

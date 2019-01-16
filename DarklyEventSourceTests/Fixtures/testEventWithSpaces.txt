@@ -1,3 +1,5 @@
+id: testEventWithSpaces
 event: test
 data: testData
+retry: 5000
 

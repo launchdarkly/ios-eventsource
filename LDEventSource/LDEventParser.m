@@ -12,6 +12,8 @@
 #import "NSString+LDEventSource.h"
 #import "NSArray+LDEventSource.h"
 
+double MILLISEC_PER_SEC = 1000.0;
+
 @interface LDEventParser()
 @property (nonatomic, copy) NSString *eventString;
 @property (nonatomic, strong) LDEvent *event;
@@ -74,8 +76,10 @@
                 } else if ([key isEqualToString:LDEventKeyId]) {
                     event.id = value;
                 } else if ([key isEqualToString:LDEventKeyRetry]) {
-                    if ([value isKindOfClass:[NSNumber class]]) {
-                        self.retryInterval = @([value doubleValue]);
+                    NSCharacterSet *nonDigitCharacters = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+                    NSRange nonDigitRange = [value rangeOfCharacterFromSet:nonDigitCharacters];
+                    if (nonDigitRange.location == NSNotFound) {
+                        self.retryInterval = @([value integerValue]/MILLISEC_PER_SEC);
                     }
                 }
             }
