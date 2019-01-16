@@ -27,7 +27,9 @@ double MILLISEC_PER_SEC = 1000.0;
 }
 
 -(instancetype)initWithEventString:(NSString*)eventString {
-    if (!(self = [super init])) { return nil; }
+    if (!(self = [super init])) {
+        return nil;
+    }
 
     self.eventString = eventString;
     [self parseEventString];
@@ -36,7 +38,9 @@ double MILLISEC_PER_SEC = 1000.0;
 }
 
 -(void)parseEventString {
-    if (self.eventString.length == 0) { return; }
+    if (self.eventString.length == 0) {
+        return;
+    }
 
     NSArray<NSString*> *linesToParse = [self linesToParseFromEventString];
     self.remainingEventString = [self remainingEventStringAfterParsingEventString];
@@ -89,26 +93,42 @@ double MILLISEC_PER_SEC = 1000.0;
 
 //extracts lines from the first thru the event terminator
 -(nullable NSArray<NSString*>*)linesToParseFromEventString {
-    if (self.eventString.length == 0) { return nil; }
-    if (!self.eventString.hasEventTerminator) { return nil; }
+    if (self.eventString.length == 0) {
+        return nil;
+    }
+    if (!self.eventString.hasEventTerminator) {
+        return nil;
+    }
 
     NSArray<NSString*> *eventStringParts = [self.eventString componentsSeparatedByString:LDEventSourceEventTerminator];
-    if (eventStringParts.count == 0) { return nil; }    //This should never happen because the guard for the terminator's presence passed...defensive
+    if (eventStringParts.count == 0) {
+        return nil;     //This should never happen because the guard for the terminator's presence passed...defensive
+    }
     NSString *eventStringToParse = [eventStringParts.firstObject stringByAppendingString:LDEventSourceEventTerminator];
 
     return [eventStringToParse lines];
 }
 
 -(nullable NSString*)remainingEventStringAfterParsingEventString {
-    if (self.eventString.length == 0) { return nil; }
-    if (!self.eventString.hasEventTerminator) { return nil; }
+    if (self.eventString.length == 0) {
+        return nil;
+    }
+    if (!self.eventString.hasEventTerminator) {
+        return nil;
+    }
 
     NSArray<NSString*> *eventStringParts = [self.eventString componentsSeparatedByString:LDEventSourceEventTerminator];
-    if (eventStringParts.count < 2) { return nil; }     //This should never happen because the guard for the terminator's presence passed...defensive
-    if (eventStringParts.count == 2 && eventStringParts[1].length == 0) { return nil; } //There is no remaining string after the terminator...this should be the normal exit
+    if (eventStringParts.count < 2) {
+        return nil;          //This should never happen because the guard for the terminator's presence passed...defensive
+    }
+    if (eventStringParts.count == 2 && eventStringParts[1].length == 0) {
+        return nil;     //There is no remaining string after the terminator...this should be the normal exit
+    }
 
     NSString *remainingEventString = [[eventStringParts subArrayFromIndex:1] componentsJoinedByString:LDEventSourceEventTerminator];
-    if (remainingEventString.length == 0) { return nil; }
+    if (remainingEventString.length == 0) {
+        return nil;
+    }
 
     return remainingEventString;
 }

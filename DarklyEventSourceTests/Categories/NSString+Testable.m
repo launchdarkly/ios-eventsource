@@ -11,7 +11,9 @@
 @implementation NSString(Testable)
 +(NSString*)stringFromFileNamed:(NSString*)fileName {
     NSString *filepath = [NSString filepathFromFileNamed:fileName];
-    if (filepath.length == 0) { return nil; }
+    if (filepath.length == 0) {
+        return nil;
+    }
     return [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
 }
 
@@ -19,13 +21,17 @@
     NSString *filepath;
     for (NSBundle *bundle in [NSBundle allBundles]) {
         filepath = [bundle pathForResource:fileName ofType:@"txt"];
-        if (filepath) { break; }
+        if (filepath) {
+            break;
+        }
     }
     return filepath;
 }
 
 -(NSArray<NSString*>*)splitIntoEqualParts:(NSInteger)parts {
-    if (parts < 2) { return @[self]; }
+    if (parts < 2) {
+        return @[self];
+    }
     NSString *remainingString = [self copy];
     NSMutableArray<NSString*> *stringParts = [NSMutableArray arrayWithCapacity:parts];
     NSInteger partLength = [self partLengthForEqualParts:parts];
@@ -45,7 +51,9 @@
 }
 
 -(NSArray<NSString*>*)splitIntoPartsApproximatelySized:(NSUInteger)size {
-    if (size == 0) { return @[self]; }
+    if (size == 0) {
+        return @[self];
+    }
     NSString *remainingString = [self copy];
     NSMutableArray<NSString*> *stringParts = [NSMutableArray arrayWithCapacity:self.length / size];
     while (remainingString.length > 0) {
