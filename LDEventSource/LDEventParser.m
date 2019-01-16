@@ -119,7 +119,7 @@ double MILLISEC_PER_SEC = 1000.0;
 
     NSArray<NSString*> *eventStringParts = [self.eventString componentsSeparatedByString:LDEventSourceEventTerminator];
     if (eventStringParts.count < 2) {
-        return nil;          //This should never happen because the guard for the terminator's presence passed...defensive
+        return nil;     //This should never happen because the guard for the terminator's presence passed...defensive
     }
     if (eventStringParts.count == 2 && eventStringParts[1].length == 0) {
         return nil;     //There is no remaining string after the terminator...this should be the normal exit
