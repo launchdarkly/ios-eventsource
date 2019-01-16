@@ -3,7 +3,7 @@
 //  DarklyEventSourceTests
 //
 //  Created by Mark Pokorny on 1/16/19. +JMJ
-//  Copyright © 2019 Neil Cowburn. All rights reserved.
+//  Copyright © 2019 Catamorphic Co. All rights reserved.
 //
 
 #import "NSString+LDEvent+Testable.h"
