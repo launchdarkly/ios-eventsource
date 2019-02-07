@@ -47,7 +47,7 @@ jobs:
 
     - run:
         name: Clean, Build, & Test
-        command: set -o pipefail && xcodebuild clean build test -workspace 'LDEventSource.xcworkspace' -scheme 'DarklyEventSource' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE= | tee 'xcode_raw.log' | xcpretty --color --report html --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/report.html' --report junit --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/xcode/report.junit'
+        command: set -o pipefail && xcodebuild clean build test -workspace 'LDEventSource.xcworkspace' -scheme 'DarklyEventSource-iOS' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE= | tee 'xcode_raw.log' | xcpretty --color --report html --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/report.html' --report junit --output '/Users/distiller/launchdarkly/ios-eventsource/tmp/output/xcode/report.junit'
 
     - run:
         name: CocoaPods lib lint
