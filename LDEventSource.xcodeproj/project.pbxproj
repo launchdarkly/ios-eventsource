@@ -441,9 +441,9 @@
 			productReference = 69DE1C251E61765000CF816C /* DarklyEventSource.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		78D92E9C220BB50400585033 /* DarklyEventSource-WatchOS */ = {
+		78D92E9C220BB50400585033 /* DarklyEventSource-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78D92EAD220BB50400585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-WatchOS" */;
+			buildConfigurationList = 78D92EAD220BB50400585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-watchOS" */;
 			buildPhases = (
 				78D92E9D220BB50400585033 /* Sources */,
 				78D92EA3220BB50400585033 /* Frameworks */,
@@ -454,14 +454,14 @@
 			);
 			dependencies = (
 			);
-			name = "DarklyEventSource-WatchOS";
+			name = "DarklyEventSource-watchOS";
 			productName = "EventSource-iOS";
 			productReference = 78D92EB0220BB50400585033 /* DarklyEventSource.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		78D92EB2220BB51700585033 /* DarklyEventSource-tvOs */ = {
+		78D92EB2220BB51700585033 /* DarklyEventSource-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78D92EC3220BB51700585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-tvOs" */;
+			buildConfigurationList = 78D92EC3220BB51700585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-tvOS" */;
 			buildPhases = (
 				78D92EB3220BB51700585033 /* Sources */,
 				78D92EB9220BB51700585033 /* Frameworks */,
@@ -472,14 +472,14 @@
 			);
 			dependencies = (
 			);
-			name = "DarklyEventSource-tvOs";
+			name = "DarklyEventSource-tvOS";
 			productName = "EventSource-iOS";
 			productReference = 78D92EC6220BB51700585033 /* DarklyEventSource.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		78D92EC8220BB51F00585033 /* DarklyEventSource-MacOs */ = {
+		78D92EC8220BB51F00585033 /* DarklyEventSource-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78D92ED9220BB51F00585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-MacOs" */;
+			buildConfigurationList = 78D92ED9220BB51F00585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-macOS" */;
 			buildPhases = (
 				78D92EC9220BB51F00585033 /* Sources */,
 				78D92ECF220BB51F00585033 /* Frameworks */,
@@ -490,7 +490,7 @@
 			);
 			dependencies = (
 			);
-			name = "DarklyEventSource-MacOs";
+			name = "DarklyEventSource-macOS";
 			productName = "EventSource-iOS";
 			productReference = 78D92EDC220BB51F00585033 /* DarklyEventSource.framework */;
 			productType = "com.apple.product-type.framework";
@@ -548,11 +548,11 @@
 			projectRoot = "";
 			targets = (
 				69DE1C241E61765000CF816C /* DarklyEventSource-iOS */,
-				2838333D17A1C02900C0141D /* EventViewer */,
+				78D92E9C220BB50400585033 /* DarklyEventSource-watchOS */,
+				78D92EB2220BB51700585033 /* DarklyEventSource-tvOS */,
+				78D92EC8220BB51F00585033 /* DarklyEventSource-macOS */,
 				835B123220E5A319009C2ACB /* DarklyEventSourceTests */,
-				78D92E9C220BB50400585033 /* DarklyEventSource-WatchOS */,
-				78D92EB2220BB51700585033 /* DarklyEventSource-tvOs */,
-				78D92EC8220BB51F00585033 /* DarklyEventSource-MacOs */,
+				2838333D17A1C02900C0141D /* EventViewer */,
 			);
 		};
 /* End PBXProject section */
@@ -1281,7 +1281,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78D92EAD220BB50400585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-WatchOS" */ = {
+		78D92EAD220BB50400585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78D92EAE220BB50400585033 /* Debug */,
@@ -1290,7 +1290,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78D92EC3220BB51700585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-tvOs" */ = {
+		78D92EC3220BB51700585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78D92EC4220BB51700585033 /* Debug */,
@@ -1299,7 +1299,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78D92ED9220BB51F00585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-MacOs" */ = {
+		78D92ED9220BB51F00585033 /* Build configuration list for PBXNativeTarget "DarklyEventSource-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78D92EDA220BB51F00585033 /* Debug */,
