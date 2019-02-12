@@ -127,11 +127,8 @@
 		2838335A17A1C02900C0141D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		69DE1C251E61765000CF816C /* DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D92EB0220BB50400585033 /* DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78D92EB1220BB50400585033 /* DarklyEventSource-WatchOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DarklyEventSource-WatchOS-Info.plist"; path = "/Users/rafaelsimonmaia/RNP/LD/embedding/sample-ios/ios-eventsource/DarklyEventSource-WatchOS-Info.plist"; sourceTree = "<absolute>"; };
 		78D92EC6220BB51700585033 /* DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78D92EC7220BB51700585033 /* DarklyEventSource-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DarklyEventSource-tvOS-Info.plist"; path = "/Users/rafaelsimonmaia/RNP/LD/embedding/sample-ios/ios-eventsource/DarklyEventSource-tvOS-Info.plist"; sourceTree = "<absolute>"; };
 		78D92EDC220BB51F00585033 /* DarklyEventSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DarklyEventSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78D92EDD220BB51F00585033 /* DarklyEventSource-MacOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DarklyEventSource-MacOS-Info.plist"; path = "/Users/rafaelsimonmaia/RNP/LD/embedding/sample-ios/ios-eventsource/DarklyEventSource-MacOS-Info.plist"; sourceTree = "<absolute>"; };
 		832C78791F291AA700E334A2 /* LDEventSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LDEventSource.h; path = LDEventSource/LDEventSource.h; sourceTree = SOURCE_ROOT; };
 		832C787B1F291AB300E334A2 /* LDEventSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LDEventSource.m; path = LDEventSource/LDEventSource.m; sourceTree = SOURCE_ROOT; };
 		832C787D1F291AC000E334A2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LDEventSource/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -221,9 +218,6 @@
 				2838332B17A1BFFE00C0141D /* Frameworks */,
 				2838332A17A1BFFE00C0141D /* Products */,
 				44CADEFF622525D649E4BAEF /* Pods */,
-				78D92EB1220BB50400585033 /* DarklyEventSource-WatchOS-Info.plist */,
-				78D92EC7220BB51700585033 /* DarklyEventSource-tvOS-Info.plist */,
-				78D92EDD220BB51F00585033 /* DarklyEventSource-MacOS-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -992,7 +986,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-WatchOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1029,7 +1023,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-WatchOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1064,7 +1058,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-tvOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1101,7 +1095,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-tvOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1136,7 +1130,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-MacOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1173,7 +1167,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DarklyEventSource-MacOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LDEventSource/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
