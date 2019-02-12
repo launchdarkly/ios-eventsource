@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "69DE1C241E61765000CF816C"
+               BlueprintIdentifier = "78D92EB2220BB51700585033"
                BuildableName = "DarklyEventSource.framework"
-               BlueprintName = "DarklyEventSource-iOS"
+               BlueprintName = "DarklyEventSource-tvOS"
                ReferencedContainer = "container:LDEventSource.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,39 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "69DE1C241E61765000CF816C"
-            BuildableName = "DarklyEventSource.framework"
-            BlueprintName = "DarklyEventSource-iOS"
-            ReferencedContainer = "container:LDEventSource.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "835B123220E5A319009C2ACB"
-               BuildableName = "DarklyEventSourceTests.xctest"
-               BlueprintName = "DarklyEventSourceTests"
-               ReferencedContainer = "container:LDEventSource.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "69DE1C241E61765000CF816C"
-            BuildableName = "DarklyEventSource.framework"
-            BlueprintName = "DarklyEventSource-iOS"
-            ReferencedContainer = "container:LDEventSource.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -75,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "69DE1C241E61765000CF816C"
+            BlueprintIdentifier = "78D92EB2220BB51700585033"
             BuildableName = "DarklyEventSource.framework"
-            BlueprintName = "DarklyEventSource-iOS"
+            BlueprintName = "DarklyEventSource-tvOS"
             ReferencedContainer = "container:LDEventSource.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -93,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "69DE1C241E61765000CF816C"
+            BlueprintIdentifier = "78D92EB2220BB51700585033"
             BuildableName = "DarklyEventSource.framework"
-            BlueprintName = "DarklyEventSource-iOS"
+            BlueprintName = "DarklyEventSource-tvOS"
             ReferencedContainer = "container:LDEventSource.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
