@@ -267,10 +267,6 @@ didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSe
     e.readyState = kEventStateConnecting;
     
     [self _dispatchEvent:e type:ReadyStateEvent];
-    
-    if (![NSThread isMainThread]) {
-        CFRunLoopRun();
-    }
 }
 
 - (void)_dispatchEvent:(LDEvent *)event type:(NSString * const)type

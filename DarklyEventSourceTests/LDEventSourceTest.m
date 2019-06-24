@@ -86,6 +86,32 @@ NSString * const dummyClientStreamHost = @"dummy.clientstream.launchdarkly.com";
     [eventSource open];
 }
 
+- (void)testOpen_backgroundThread {
+    NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
+    [self stubResponseWithData:[putEventString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    __block XCTestExpectation *eventExpectation = [self expectationWithMethodName:NSStringFromSelector(_cmd) expectationName:@"eventExpectation"];
+    LDEventSource *eventSource = [LDEventSource eventSourceWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", dummyClientStreamHost]] httpHeaders:nil];
+    [eventSource onMessage:^(LDEvent *event) {
+        XCTAssertNotNil(event);
+        XCTAssertEqualObjects(event.id, putEventString.eventId);
+        XCTAssertEqualObjects(event.event, putEventString.eventEvent);
+        XCTAssertEqualObjects(event.data, putEventString.eventData);
+        XCTAssertEqual(event.readyState, kEventStateOpen);
+        XCTAssertEqual(eventSource.retryInterval, [putEventString.eventRetry integerValue] / MILLISEC_PER_SEC);
+        [eventExpectation fulfill];
+    }];
+
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.launchDarkly.test.eventSource.openOnBackgroundThread", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(backgroundQueue, ^{
+        [eventSource open];
+    });
+
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        eventExpectation = nil;
+    }];
+}
+
 -(void)testDidReceiveData_singleCall {
     NSString *putEventString = [NSString stringFromFileNamed:@"largePutEvent"];
     [self stubResponseWithData:[NSData data]];
