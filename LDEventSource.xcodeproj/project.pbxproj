@@ -976,7 +976,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-watchOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1013,7 +1013,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-watchOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1048,7 +1048,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-tvOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -1085,7 +1085,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-tvOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -1120,7 +1120,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-macOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1157,7 +1157,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.launchdarkly.EventSource;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.EventSource-macOS";
 				PRODUCT_NAME = DarklyEventSource;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
