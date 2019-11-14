@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name         = "DarklyEventSource"
-	s.version      = "4.0.2"
+	s.version      = "4.0.3"
 	s.summary      = "HTML5 Server-Sent Events in your Cocoa app."
 	s.homepage     = "https://github.com/launchdarkly/ios-eventsource"
 	s.license      = 'MIT (see LICENSE.txt)'
