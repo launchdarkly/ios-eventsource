@@ -12,5 +12,6 @@ Pod::Spec.new do |s|
 	s.watchos.deployment_target = '2.0'
 	s.tvos.deployment_target = '9.0'
 	s.requires_arc = true
+	s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 	s.xcconfig = { 'OTHER_LDFLAGS' => '-lobjc' }
 end
