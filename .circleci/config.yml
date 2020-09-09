@@ -16,8 +16,8 @@ jobs:
           mkdir -p 'artifacts'
 
     - run:
-        name: Build & Test
-        command: xcodebuild test -workspace 'LDEventSource.xcworkspace' -scheme 'DarklyEventSource-iOS' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6' CODE_SIGN_IDENTITY= | tee 'artifacts/xcode_raw.log' | xcpretty -r junit -o 'test-results/ios-tests/junit.xml'
+        name: Build and test
+        command: xcodebuild test -workspace 'LDEventSource.xcworkspace' -scheme 'DarklyEventSource-iOS' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max' CODE_SIGN_IDENTITY= | tee 'artifacts/xcode_raw.log' | xcpretty -r junit -o 'test-results/ios-tests/junit.xml'
 
     - run:
         name: CocoaPods spec lint
@@ -29,7 +29,7 @@ jobs:
           fi
 
     - store_test_results:
-        destination: test-results
+        path: test-results
 
     - store_artifacts:
-        destination: artifacts
+        path: artifacts
