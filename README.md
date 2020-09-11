@@ -1,6 +1,8 @@
 # EventSource
 **Server-Sent Events for iOS, watchOS, tvOS and macOS**
 
+_This library is deprecated, slated to become unmaintained in July 2021. LaunchDarkly's [iOS SDK](https://github.com/launchdarkly/ios-client-sdk) has moved to using a new [Swift SSE](https://github.com/launchdarkly/swift-eventsource) library as a replacement._
+
 ![Travis](https://travis-ci.org/neilco/EventSource.svg?branch=master)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DarklyEventSource.svg)](https://img.shields.io/cocoapods/v/DarklyEventSource.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -106,7 +108,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 target 'TargetName' do
-pod 'DarklyEventSource', '~> 4.1.0'
+pod 'DarklyEventSource', '~> 4.1.1'
 end
 ```
 
@@ -130,7 +132,7 @@ $ brew install carthage
 To integrate EventSource into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "launchdarkly/ios-eventsource" >= 4.1.0
+github "launchdarkly/ios-eventsource" >= 4.1.1
 ```
 
 Run `carthage` to build the framework and drag the built `EventSource.framework` into your Xcode project.
